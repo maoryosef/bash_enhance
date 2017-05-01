@@ -29,21 +29,28 @@ if (filenameParts.length > 1) {
 const highlight = spawn('rougify', [filename]);
 let highlighted = '';
 highlight.stdout.on('data', (data) => {
-    _(data).split('\n').forEach((ln, i) => {
-        if (i + 1 === lineNumber) {
-            highlighted += `${HIGHLIGHT_LINE_START}${ln.replace(ASCII_COLOR_REGEX, '')}${HIGHLIGHT_LINE_END}\n`;
-        } else {
-            highlighted += `${ln}\n`;
-        }
-    });
+    highlighted += data;
 });
 
+function markSelectedLine(content, lineNumber) {
+    let retVal = '';
+    _(content).split('\n').forEach((ln, i) => {
+        if (i + 1 === lineNumber) {
+            retVal += `${HIGHLIGHT_LINE_START}${ln.replace(ASCII_COLOR_REGEX, '')}${HIGHLIGHT_LINE_END}\n`;
+        } else {
+            retVal += `${ln}\n`;
+        }
+    });
+
+    return retVal;
+}
+
 highlight.on('close', () => {
-    const less = spawn(`less -R -N ${lineNumberString} > /dev/tty`, [], {shell: true});
+    const less = spawn(`less -R -N ${lineNumberString} > /dev/tty`, [], { shell: true });
     less.stdin.setEncoding('utf-8');
 
     less.stdout.pipe(process.stdout);
 
-    less.stdin.write(highlighted);
+    less.stdin.write(markSelectedLine(highlighted, lineNumber));
     less.stdin.end();
 });
