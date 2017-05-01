@@ -1,4 +1,4 @@
-# Enhance bash in OSX
+# Enhanced bash for OSX
 ## Required tools for all to work
 * [Rougify](https://github.com/jneen/rouge) - ruby based syntax highlighter (```gem install rouge```)
 * [Silver searcher](https://github.com/ggreer/the_silver_searcher) - Advnaced in files searcher (```brew install ag```)
