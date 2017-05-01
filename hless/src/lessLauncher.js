@@ -16,6 +16,14 @@ function launch(content, lineNumber) {
 
     less.stdin.write(content);
     less.stdin.end();
+
+    less.stdin.on('error', err => {
+        if (err.code === 'EPIPE') {
+            process.exit();
+        }
+
+        console.error(err);
+    })
 }
 
 module.exports = {
