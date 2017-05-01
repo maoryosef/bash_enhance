@@ -1,0 +1,16 @@
+{
+  "name": "hless",
+  "version": "0.0.1",
+  "description": "Highlighted syntax less wrapper",
+  "main": "src/index.js",
+  "author": "Maor Yosef",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
+  "bin": "bin/run",
+  "files": [
+    "bin",
+    "src"
+  ]
+}
