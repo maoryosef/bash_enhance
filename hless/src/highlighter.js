@@ -1,11 +1,9 @@
-'use strict';
-
 const spawn = require('child_process').spawn;
 const _ = require('lodash');
 
-const ASCII_COLOR_REGEX = /(\x1b\[[0-9;]*m)/g
-const HIGHLIGHT_LINE_START = "\x1b[7m"
-const HIGHLIGHT_LINE_END = "\x1b[m"
+const ASCII_COLOR_REGEX = /(\x1b\[[0-9;]*m)/g; //eslint-disable-line no-control-regex
+const HIGHLIGHT_LINE_START = '\x1b[7m';
+const HIGHLIGHT_LINE_END = '\x1b[m';
 
 function highlightLine(content, lineNumber) {
     let retVal = '';
@@ -32,7 +30,7 @@ function highlightFile(filename, lineNumber, cb) {
             highlighted = highlightLine(highlighted, lineNumber);
         }
 
-        cb(highlighted)
+        cb(highlighted);
     });
 }
 

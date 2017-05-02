@@ -5,6 +5,9 @@
   "main": "src/index.js",
   "author": "Maor Yosef",
   "license": "ISC",
+  "scripts": {
+    "lint" : "eslint . --ext .js"
+  },
   "dependencies": {
     "lodash": "^4.17.4"
   },
@@ -12,5 +15,8 @@
   "files": [
     "bin",
     "src"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
 }

@@ -1,5 +1,3 @@
-'use strict';
-
 const spawn = require('child_process').spawn;
 
 function launch(content, lineNumber) {
@@ -11,7 +9,7 @@ function launch(content, lineNumber) {
         lineBufferStr = `-j${lineNumber}`;
     }
 
-    const less = spawn(`less -R -N ${lineBufferStr} +${lineNumber}g > /dev/tty`, [], { shell: true });
+    const less = spawn(`less -R -N ${lineBufferStr} +${lineNumber}g > /dev/tty`, [], {shell: true});
     less.stdin.setEncoding('utf-8');
 
     less.stdout.pipe(process.stdout);
@@ -25,9 +23,9 @@ function launch(content, lineNumber) {
         }
 
         console.error(err);
-    })
+    });
 }
 
 module.exports = {
     launch
-}
+};
