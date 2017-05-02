@@ -6,12 +6,15 @@
   "author": "Maor Yosef",
   "license": "ISC",
   "scripts": {
-    "lint" : "eslint . --ext .js"
+    "lint" : "eslint . --ext .js && eslint bin/**"
   },
   "dependencies": {
     "lodash": "^4.17.4"
   },
-  "bin": "bin/run",
+  "bin": {
+    "hless": "bin/hless",
+    "hpreview": "bin/hpreview"
+  },
   "files": [
     "bin",
     "src"
