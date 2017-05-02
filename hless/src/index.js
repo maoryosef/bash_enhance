@@ -5,11 +5,18 @@ const highlighter = require('./highlighter.js');
 const lessLauncher = require('./lessLauncher.js');
 
 function openHighlightedLess(filename, lineNumber) {
-    highlighter.highlightFile(filename, lineNumber, content => {
+    highlighter.highlightFile(filename, lineNumber, false, content => {
         lessLauncher.launch(content, lineNumber);
     });
 }
 
+function openPreview(filename, lineNumber) {
+    highlighter.highlightFile(filename, lineNumber, true, content => {
+        console.log(content);
+    });
+}
+
 module.exports = {
-    openHighlightedLess
+    openHighlightedLess,
+    openPreview
 };

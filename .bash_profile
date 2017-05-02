@@ -58,7 +58,7 @@ function fz() {
 	fi
 
 	# fzcmd="ag $ag_flags $ag_pattern $ag_path | fzf $fzf_flags --preview 'echo {} | perl -pe \"s|(.*?):.*|\1|\" | xargs rougify' --preview-window 'up:10'"
-	fzcmd="ag $ag_flags $ag_pattern $ag_path | fzf $fzf_flags --reverse --preview 'fz-preview {}' --preview-window 'up:50%' --bind 'ctrl-e:execute:(hless {})'"
+	fzcmd="ag $ag_flags $ag_pattern $ag_path | fzf $fzf_flags --reverse --preview 'hpreview {}' --preview-window 'up:50%' --bind 'ctrl-e:execute:(hless {})'"
 
 	rawfilename=`eval $fzcmd`
 
