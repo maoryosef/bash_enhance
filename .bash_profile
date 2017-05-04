@@ -77,8 +77,15 @@ function fz() {
 	fi
 }
 
-function maortest() {
-	echo "$@"
+function npmr() {
+	local script
+
+	script=`ls-scripts | fzf --border --height 40% --reverse`
+	if [[ "$script" != "" ]]
+	then
+		script=${script%% *}
+		eval "npm run $script"
+	fi
 }
 
 function chromehistory () {
@@ -122,7 +129,7 @@ function jb () {
 
 	branchName=`git branch -l | fzf --border --height 40% --reverse`
 
-	if [[ branchName != "" ]]
+	if [[ "$branchName" != "" ]]
 	then
 		eval "git checkout $branchName"
 	fi
@@ -154,6 +161,7 @@ function cheatsheet () {
 	cmdList="$cmdList\nlla: ls -l -al"
 	cmdList="$cmdList\nnpmprivate: switch to npm private"
 	cmdList="$cmdList\nnpmpublic: switch to npm private"
+	cmdList="$cmdList\nnpmr: list available npm scripts"
 	
 	rawCmd=`printf "$cmdList" | fzf --border --height 60% --reverse`
 
