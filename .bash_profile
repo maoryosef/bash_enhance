@@ -80,7 +80,7 @@ function fz() {
 function npmr() {
 	local script
 
-	script=`ls-scripts | sed '1,2 d; /---/,1 d; /^$/ d' | fzf --border --height 40% --reverse`
+	script=`ls-scripts 2> /dev/null | sed '1,2 d; /---/,1 d; /^$/ d' | fzf --border --height 40% --reverse`
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
@@ -91,7 +91,7 @@ function npmr() {
 function gruntr() {
 	local script
 
-	script=`ls-grunt | sed '/^$/,$ d' | fzf --border --height 40% --reverse`
+	script=`ls-grunt 2> /dev/null | sed '/^$/,$ d' | fzf --border --height 40% --reverse`
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
