@@ -12,3 +12,19 @@
 ```bash
 ln .bash_profile ~/.bash_profile
 ```
+
+### Available commands:
+* ```bashbuild```: recompile bash
+* ```bh```: show commands history
+* ```cheatsheet```: list available commands
+* ```chromehistory```: search in chrome history
+* ```fz```: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)
+* ```gfa```: git fetch --all
+* ```gpr```: git pull --rebase
+* ```gs```: git status
+* ```jb```: jump to branch (GIT)
+* ```jf```: jump to recent folders
+* ```ll```: Alias to ls -l
+* ```lla```: Alias to ls -l -al
+* ```npmr```: list available npm scripts in root
+* ```gruntr```: list available grunt tasks in root
