@@ -160,12 +160,12 @@ function cheatsheet () {
 
 	rawCmd=""
 	cmdList="bashbuild: recompile bash"
-	cmdList="$cmdList\ngruntr: list available grunt tasks"
 	cmdList="$cmdList\nbh: show commands history"
 	cmdList="$cmdList\nchromehistory: search in chrome history"
 	cmdList="$cmdList\nfz: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)"
 	cmdList="$cmdList\ngfa: git fetch --all"
 	cmdList="$cmdList\ngpr: git pull --rebase"
+	cmdList="$cmdList\ngruntr: list available grunt tasks"
 	cmdList="$cmdList\ngs: git status"
 	cmdList="$cmdList\njb: jump to branch"
 	cmdList="$cmdList\njf: jump to recent folders"
