@@ -95,7 +95,7 @@ function gruntr() {
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
-		eval "npm run $script"
+		eval "grunt $script"
 	fi
 }
 
