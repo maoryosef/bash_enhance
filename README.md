@@ -6,6 +6,7 @@
 * [Auto jump](https://github.com/wting/autojump) - Smarted directory changer (```brew install autojump```)
 * [LS Scripts](https://www.npmjs.com/package/npm-ls-scripts) - List available npm scripts (```npm i -g npm-ls-scripts```)
 * hless - wrapper to show files with highlited syntax in less (cd into hless run ```npm i -g .```)
+* Grunt task lister - list grunt tasks (cd into grunt-task-lister run ```npm i -g .```)
 
 ##### Need to link .bash_profile to user's bash_profile
 ```bash

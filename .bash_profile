@@ -80,7 +80,18 @@ function fz() {
 function npmr() {
 	local script
 
-	script=`ls-scripts | fzf --border --height 40% --reverse`
+	script=`ls-scripts | sed '1,2 d; /---/,1 d; /^$/ d' | fzf --border --height 40% --reverse`
+	if [[ "$script" != "" ]]
+	then
+		script=${script%% *}
+		eval "npm run $script"
+	fi
+}
+
+function gruntr() {
+	local script
+
+	script=`ls-grunt | sed '/^$/,$ d' | fzf --border --height 40% --reverse`
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
@@ -149,6 +160,7 @@ function cheatsheet () {
 
 	rawCmd=""
 	cmdList="bashbuild: recompile bash"
+	cmdList="$cmdList\ngruntr: list available grunt tasks"
 	cmdList="$cmdList\nbh: show commands history"
 	cmdList="$cmdList\nchromehistory: search in chrome history"
 	cmdList="$cmdList\nfz: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)"
@@ -193,7 +205,7 @@ alias ll='ls -l'
 alias lla='ls -al'
 alias ls='ls -GF1'
 alias grep='grep --color=auto'
-alias npmprivate='npm config set registry http://repo.dev.wixpress.com/artifactory/api/npm/npm-repos'
+alias npmprivate='npm config set registry http://npm.dev.wixpress.com'
 alias npmpublic='npm config set registry https://registry.npmjs.org/'
 
 alias bashbuild='source ~/.bash_profile'
