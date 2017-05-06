@@ -148,7 +148,7 @@ function jb () {
 
 function jfzf () {
 	local dir
-	dir=`j -s | egrep '^\d+.\d+:\s+/' | tail -r | fzf`
+	dir=`j -s | egrep '^\d+.\d+:\s+/' | tail -r | fzf --border --height 40% --reverse`
 	if [[ -n dir ]]
 	then
 			cd $(echo $dir | sed -E 's#[^/]*(/.*$)#''\1''#')
