@@ -1,0 +1,25 @@
+{
+  "name": "grunt-task-lister",
+  "version": "0.0.1",
+  "description": "List available grunt tasks",
+  "main": "src/index.js",
+  "author": "Maor Yosef",
+  "license": "ISC",
+  "scripts": {
+    "lint" : "eslint . --ext .js && eslint bin/**"
+  },
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "lodash": "^4.17.4"
+  },
+  "bin": {
+    "ls-grunt": "bin/ls-grunt"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
+}
