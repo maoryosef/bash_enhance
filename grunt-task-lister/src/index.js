@@ -5,7 +5,7 @@ const fs = require('fs');
 const gruntFileName = `${process.cwd()}/Gruntfile.js`;
 
 if (!fs.existsSync(gruntFileName)) {
-    console.error('Unable to locate Gruntfile.js in current directory');
+    console.log('Unable to locate Gruntfile.js in current directory');
     process.exit(1);
 }
 
