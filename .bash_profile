@@ -137,8 +137,11 @@ export PROMPT_COMMAND=getBadgeName
 
 function jb () {
 	local branchName
-
-	branchName=`git branch -l | fzf --border --height 40% --reverse`
+	branchName="$1"
+	if [[ "$branchName" == "" ]]
+	then
+		branchName=`git branch -l | fzf --border --height 40% --reverse`
+	fi
 
 	if [[ "$branchName" != "" ]]
 	then
@@ -151,7 +154,7 @@ function jfzf () {
 	dir=`j -s | egrep '^\d+.\d+:\s+/' | tail -r | fzf --border --height 40% --reverse`
 	if [[ -n dir ]]
 	then
-			cd $(echo $dir | sed -E 's#[^/]*(/.*$)#''\1''#')
+		cd $(echo $dir | sed -E 's#[^/]*(/.*$)#''\1''#')
 	fi
 }
 
