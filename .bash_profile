@@ -142,7 +142,7 @@ function jb () {
 	branchName="$1"
 	if [[ "$branchName" == "" ]]
 	then
-		branchName=`git branch -l | fzf --border --height 40% --reverse`
+		branchName=`git branch -l | sed '/^\*/ d' | fzf --border --height 40% --reverse`
 	fi
 
 	if [[ "$branchName" != "" ]]
