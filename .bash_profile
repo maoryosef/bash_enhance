@@ -84,6 +84,7 @@ function npmr() {
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
+		history -s "npm run $script"
 		eval "npm run $script"
 	fi
 }
@@ -95,6 +96,7 @@ function gruntr() {
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
+		history -s "grunt $script"
 		eval "grunt $script"
 	fi
 }
@@ -145,6 +147,7 @@ function jb () {
 
 	if [[ "$branchName" != "" ]]
 	then
+		history -s "git checkout $branchName"
 		eval "git checkout $branchName"
 	fi
 }
