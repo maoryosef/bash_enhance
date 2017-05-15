@@ -203,7 +203,7 @@ alias jf=jfzf
 
 ############ Add aliases for git ###################
 alias gs='git status'
-alias gpr='git pull --rebase'
+alias gpr='git pull --rebase --stat'
 alias gfa='git fetch --all'
 ####################################################
 
