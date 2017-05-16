@@ -171,6 +171,7 @@ function cheatsheet () {
 	cmdList="$cmdList\nfz: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)"
 	cmdList="$cmdList\ngfa: git fetch --all"
 	cmdList="$cmdList\ngpr: git pull --rebase"
+	cmdList="$cmdList\ngrd: git rebase --ignore-date"
 	cmdList="$cmdList\ngruntr: list available grunt tasks"
 	cmdList="$cmdList\ngs: git status"
 	cmdList="$cmdList\njb: jump to branch"
@@ -186,6 +187,7 @@ function cheatsheet () {
 	if [[ $rawCmd != "" ]]
 	then
 		cmd=${rawCmd%%:*}
+		history -s "$cmd"
 		eval "$cmd"
 	fi
 }
@@ -195,6 +197,7 @@ function bh () {
 	cmd=`cat ~/.bash_history | fzf --border --height 60% --reverse`
 
 	if [ "$cmd" != "" ]; then
+		history -s "$cmd"
 		eval "$cmd"
 	fi
 }
@@ -204,6 +207,7 @@ alias jf=jfzf
 ############ Add aliases for git ###################
 alias gs='git status'
 alias gpr='git pull --rebase --stat'
+alias grd='git rebase --ignore-date'
 alias gfa='git fetch --all'
 ####################################################
 
