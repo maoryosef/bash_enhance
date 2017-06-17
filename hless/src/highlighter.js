@@ -1,5 +1,6 @@
-const spawn = require('child_process').spawn;
+const shelljs = require('shelljs');
 const _ = require('lodash');
+const fs = require('fs');
 
 const ASCII_COLOR_REGEX = /(\x1b\[[0-9;]*m)/g; //eslint-disable-line no-control-regex
 const HIGHLIGHT_LINE_START = '\x1b[7m';
@@ -13,7 +14,9 @@ function highlightLine(content, lineNumber, center) {
     let height = contentArr.length;
 
     if (center) {
-        height = DEF_HEIGHT; //TODO take tty height
+        var ttyHeight = fs.existsSync('/dev/tty') ? shelljs.exec('stty size < /dev/tty', {silent: true}).stdout : `${DEF_HEIGHT} x`;
+
+        height = _.parseInt(_(ttyHeight).split(' ').head());
         height -= 2;
         centerOffset = Math.ceil(Math.max(1, lineNumber - height / 3));
     }
