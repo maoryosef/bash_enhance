@@ -36,17 +36,10 @@ function highlightLine(content, lineNumber, center) {
 }
 
 function highlightFile(filename, lineNumber, center, cb) {
-    const highlight = spawn('rougify', [filename]);
-    let highlighted = '';
-    highlight.stdout.on('data', (data) => {
-        highlighted += data;
-    });
+    let highlighted = shelljs.exec(`rougify ${filename}`, {silent: true}).stdout;
 
-    highlight.on('close', () => {
-        highlighted = highlightLine(highlighted, lineNumber, center);
-
-        cb(highlighted);
-    });
+    highlighted = highlightLine(highlighted, lineNumber, center);
+    cb(highlighted);
 }
 
 module.exports = {
