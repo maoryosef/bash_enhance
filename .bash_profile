@@ -117,23 +117,15 @@ function chromehistory () {
 
 CURRENT_PROJ=""
 
-function getBadgeName () {
-	local projectName
-	projectName="${PWD#*/GIT/}"
-	if [ "$projectName" == "$PWD" ]
-	then
-		projectName="${PWD#*/git/}"
-	fi
-
-	projectName="${projectName%%/*}"
-
-	if [ "$CURRENT_PROJ" != "$projectName" ]
-	then
-		CURRENT_PROJ="$projectName"
-		iterm2_set_user_var project "$projectName"
-	fi
+function getBadgeName() {
+    inside_git_repo="$(git rev-parse --is-inside-work-tree 2>/dev/null)";
+    if [ "$inside_git_repo" ]; then 
+      projectName=`git rev-parse --show-toplevel | xargs basename`;
+      iterm2_set_user_var project "$projectName";
+    else 
+      iterm2_set_user_var project "";
+    fi
 }
-
 
 export PROMPT_COMMAND=getBadgeName
 
