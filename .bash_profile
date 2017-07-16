@@ -30,7 +30,7 @@ function fz() {
 	do
 		case $var in
 			"-h" ) 
-				ag_flags="--hidden $ag_flags" 
+				ag_flags="--hidden -a $ag_flags" 
 			;;
 			"-g" )
 				ag_path="~/"
