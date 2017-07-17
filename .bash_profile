@@ -134,13 +134,14 @@ function jb () {
 	branchName="$1"
 	if [[ "$branchName" == "" ]]
 	then
-		branchName=`git branch -l | sed '/^\*/ d' | fzf --border --height 40% --reverse`
+		branchName=`git branch -l -vv --color | sed '/^\*/ d' | fzf --ansi --border --height 40% --reverse`
 	fi
 
 	if [[ "$branchName" != "" ]]
 	then
-		history -s "git checkout $branchName"
-		eval "git checkout $branchName"
+		branchNameArr=($branchName)
+		history -s "git checkout ${branchNameArr[0]}"
+		eval "git checkout ${branchNameArr[0]}"
 	fi
 }
 
