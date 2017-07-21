@@ -80,7 +80,7 @@ function fz() {
 function npmr() {
 	local script
 
-	script=`ls-scripts 2> /dev/null | sed '1,2 d; /---/,1 d; /^$/ d' | fzf --border --height 40% --reverse`
+	script=`ls-scripts 2> /dev/null | sed '1,2 d; /---/,1 d; /^$/ d' | fzf --border --height 40% --reverse --prompt="NPM Task>"`
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
@@ -92,7 +92,7 @@ function npmr() {
 function gruntr() {
 	local script
 
-	script=`ls-grunt 2> /dev/null | sed '/^$/,$ d' | fzf --border --height 40% --reverse`
+	script=`ls-grunt 2> /dev/null | sed '/^$/,$ d' | fzf --border --height 40% --reverse --prompt="Grunt task>"`
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
@@ -112,8 +112,10 @@ function chromehistory () {
     "select substr(title, 1, $cols), url
      from urls order by last_visit_time desc" |
   awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-  fzf --ansi --multi --preview 'echo {}' --preview-window 'up:3:wrap' --bind 'ctrl-g:toggle-preview' | perl -pe 's|.*?(https*://.*?)|\1|' | xargs open
+  fzf --prompt="Chrome history>" --ansi --reverse --multi --preview "echo {} | perl -pe 's|.*?(https*://.*?)|\x1b[34;1m\1|; s|([?&])|\n\1|g; s|([?&])(.*)=(.*)|\1\x1b[31;1m\2=\3|g'" --preview-window 'up:10:wrap' --bind 'ctrl-g:toggle-preview' | perl -pe 's|.*?(https*://.*?)|\1|' | xargs open
 }
+
+alias jch=chromehistory
 
 CURRENT_PROJ=""
 
@@ -134,7 +136,7 @@ function jb () {
 	branchName="$1"
 	if [[ "$branchName" == "" ]]
 	then
-		branchName=`git branch -l -vv --color | sed '/^\*/ d' | fzf --ansi --border --height 40% --reverse`
+		branchName=`git branch -l -vv --color | sed '/^\*/ d' | fzf --ansi --border --height 40% --reverse --prompt="Branch>"`
 	fi
 
 	if [[ "$branchName" != "" ]]
@@ -160,7 +162,7 @@ function cheatsheet () {
 	rawCmd=""
 	cmdList="bashbuild: recompile bash"
 	cmdList="$cmdList\nbh: show commands history"
-	cmdList="$cmdList\nchromehistory: search in chrome history"
+	cmdList="$cmdList\nchromehistory: search in chrome history (or jch)"
 	cmdList="$cmdList\nfz: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)"
 	cmdList="$cmdList\ngfa: git fetch --all"
 	cmdList="$cmdList\ngpr: git pull --rebase"
