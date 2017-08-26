@@ -17,16 +17,16 @@ function git_p() {
 	git_pr="${git_pr/\+/ \033[1;32m✚\033[0m}"
 	#No difference with branch
 	git_pr="${git_pr/=/}"
+	#Divereged from branch
+	git_pr="${git_pr/<>/ \033[1;31m⍼\033[0m}"
 	#Behind branch
 	git_pr="${git_pr/</ \033[1;34m↓\033[0m}"
 	#Ahead of branch
 	git_pr="${git_pr/>/ \033[1;34m↑\033[0m}"
-	#Divereged from branch
-	git_pr="${git_pr/<>/ \033[1;31m↕\033[0m}"
 	
 	printf "$git_pr"
 }
-#⁑※➤❅✚⇞↕↑↓
+#⁑※➤❅✚⇞↕↑∯⍼⌧
 export PS1='\[\033[0;32m\]\u\[\033[0m\]@ \[\033[1;96m\]\w\[\033[0m\] $(git_p)\[\033[1;37m➤\033[0m '
 
 export CLICOLOR='true'
