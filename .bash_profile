@@ -26,7 +26,7 @@ function git_p() {
 	
 	printf "$git_pr"
 }
-#⁑※➤❅✚⇞↕↑∯⍼⌧
+#⁑※➤❅✚⇞↕↑∯⍼⌧『』〘 〙《 》
 export PS1='\[\033[0;32m\]\u\[\033[0m\]@ \[\033[1;96m\]\w\[\033[0m\] $(git_p)\[\033[1;37m➤\033[0m '
 
 export CLICOLOR='true'
@@ -99,8 +99,7 @@ function fz() {
 
 function npmr() {
 	local script
-
-	script=`ls-scripts 2> /dev/null | sed '1,2 d; /---/,1 d; /^$/ d' | fzf --border --height 40% --reverse --prompt="NPM Task>"`
+	script=`ls-scripts 2> /dev/null | sed '1,2 d; /---/,1 d; /^$/ d' | fzf --border --height 40% --reverse --bind 'ctrl-c:execute-silent(echo {} | perl -pe "s|^(?:[^\s]*)\s*-?\s?(.*?)\r?\n?$|\1|" | pbcopy)+abort' --prompt="NPM Task>"`
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
