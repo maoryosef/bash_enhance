@@ -27,7 +27,7 @@ function git_p() {
 	printf "$git_pr"
 }
 #⁑※➤❅✚⇞↕↑∯⍼⌧『』〘 〙《 》
-export PS1='\[\033[0;32m\]\u\[\033[0m\]@ \[\033[1;96m\]\w\[\033[0m\] $(git_p)\[\033[1;37m➤\033[0m '
+export PS1='\[\033[0;32m\]\u\[\033[0m\]@ \[\033[1;96m\]\w\[\033[0m\] $(git_p)\n\[\033[1;37m\]➤➤➤\[\033[0m\] '
 
 export CLICOLOR='true'
 export LSCOLORS="gxfxcxdxbxCgCdabagacad"
