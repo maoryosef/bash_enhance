@@ -148,7 +148,33 @@ function getBadgeName() {
     fi
 }
 
-export PROMPT_COMMAND=getBadgeName
+LAST_NVMRC_LOCATION=""
+LAST_NVMRC_VERSION=""
+
+function changeNodeVersion() {
+	local dir nvmrcVersion
+	if [ -e ".nvmrc" ]
+	then
+		dir=`echo $(pwd)`
+		if [ "$dir" != "$LAST_NVMRC_LOCATION" ] 
+		then
+			nvmrcVersion=`cat .nvmrc`
+			if [ "$nvmrcVersion" != "$LAST_NVMRC_VERSION" ]
+			then
+				nvm use
+				LAST_NVMRC_LOCATION="$dir"
+				LAST_NVMRC_VERSION="$nvmrcVersion"
+			fi
+		fi
+	fi
+}
+
+function doPromptStuff() {
+	getBadgeName
+	changeNodeVersion
+}
+
+export PROMPT_COMMAND=doPromptStuff
 
 function jb () {
 	local branchName
