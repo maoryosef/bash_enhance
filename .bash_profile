@@ -192,6 +192,14 @@ function jb () {
 	fi
 }
 
+function jbComplete() {
+	COMPREPLY=(`eval "git branch -l | sed 's/ //g' | sed '/^\*/ d' | sed '/^${2}/ !d'"`)
+
+	return 0
+}
+
+complete -F jbComplete jb
+
 function jfzf () {
 	local dir
 	dir=`j -s | egrep '^\d+.\d+:\s+/' | tail -r | fzf --border --height 40% --reverse`
