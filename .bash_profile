@@ -294,7 +294,8 @@ alias bashbuild='source ~/.bash_profile'
 npmprivate
 
 #Fix ssh issues in sierra, where keys are lost
-ssh-add -K
+# ssh-add -K
+# fixed according to https://superuser.com/questions/1127067/macos-keeps-asking-my-ssh-passphrase-since-i-updated-to-sierra
 ###############################################
 #Add cargo to path
 source /Users/maory/.cargo/env
