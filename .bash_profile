@@ -99,7 +99,14 @@ function fz() {
 
 function npmr() {
 	local script
-	script=`ls-scripts 2> /dev/null | sed '1,2 d; /---/,1 d; /^$/ d' | fzf --border --height 40% --reverse --bind 'ctrl-c:execute-silent(echo {} | perl -pe "s|^(?:[^\s]*)\s*-?\s?(.*?)\r?\n?$|\1|" | pbcopy)+abort' --prompt="NPM Task>"`
+
+	script="$1"
+
+	if [[ $script == "" ]]
+	then
+		script=`ls-scripts 2> /dev/null | sed '1,2 d; /---/,1 d; /^$/ d' | fzf --border --height 40% --reverse --bind 'ctrl-c:execute-silent(echo {} | perl -pe "s|^(?:[^\s]*)\s*-?\s?(.*?)\r?\n?$|\1|" | pbcopy)+abort' --prompt="NPM Task>"`
+	fi
+
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
@@ -107,6 +114,24 @@ function npmr() {
 		eval "npm run $script"
 	fi
 }
+
+function npmrComplete() {
+	local commands
+	COMPREPLY=()
+	commands=(`ls-scripts 2> /dev/null | sed '1,2 d; /---/,1 d; /^$/ d; s/ .*//g'`)
+
+	for i in "${commands[@]}"
+	do
+		if [[ $i == "$2"* ]]
+		then
+			COMPREPLY+=($i)
+		fi
+	done
+
+	return 0
+}
+
+complete -F npmrComplete npmr
 
 function gruntr() {
 	local script
