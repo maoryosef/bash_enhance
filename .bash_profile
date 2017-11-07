@@ -212,25 +212,29 @@ function jfzf () {
 function cheatsheet () {
 	local cmd rawCmd cmdList
 
-	rawCmd=""
-	cmdList="bashbuild: recompile bash"
-	cmdList="$cmdList\nbh: show commands history"
-	cmdList="$cmdList\nchromehistory: search in chrome history (or jch)"
-	cmdList="$cmdList\nfz: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)"
-	cmdList="$cmdList\ngfa: git fetch --all"
-	cmdList="$cmdList\ngpr: git pull --rebase"
-	cmdList="$cmdList\ngrd: git rebase --ignore-date"
-	cmdList="$cmdList\ngruntr: list available grunt tasks"
-	cmdList="$cmdList\ngs: git status"
-	cmdList="$cmdList\njb: jump to branch"
-	cmdList="$cmdList\njf: jump to recent folders"
-	cmdList="$cmdList\nll: ls -l"
-	cmdList="$cmdList\nlla: ls -l -al"
-	cmdList="$cmdList\nnpmprivate: switch to npm private"
-	cmdList="$cmdList\nnpmpublic: switch to npm private"
-	cmdList="$cmdList\nnpmr: list available npm scripts"
+	rawCmd="$1"
+
+	if [[ $rawCmd == "" ]] 
+	then
+		cmdList="bashbuild: recompile bash"
+		cmdList="$cmdList\nbh: show commands history"
+		cmdList="$cmdList\nchromehistory: search in chrome history (or jch)"
+		cmdList="$cmdList\nfz: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)"
+		cmdList="$cmdList\ngfa: git fetch --all"
+		cmdList="$cmdList\ngpr: git pull --rebase"
+		cmdList="$cmdList\ngrd: git rebase --ignore-date"
+		cmdList="$cmdList\ngruntr: list available grunt tasks"
+		cmdList="$cmdList\ngs: git status"
+		cmdList="$cmdList\njb: jump to branch"
+		cmdList="$cmdList\njf: jump to recent folders"
+		cmdList="$cmdList\nll: ls -l"
+		cmdList="$cmdList\nlla: ls -l -al"
+		cmdList="$cmdList\nnpmprivate: switch to npm private"
+		cmdList="$cmdList\nnpmpublic: switch to npm private"
+		cmdList="$cmdList\nnpmr: list available npm scripts"
 	
-	rawCmd=`printf "$cmdList" | fzf --border --height 60% --reverse`
+		rawCmd=`printf "$cmdList" | fzf --border --height 60% --reverse`
+	fi
 
 	if [[ $rawCmd != "" ]]
 	then
@@ -239,6 +243,25 @@ function cheatsheet () {
 		eval "$cmd"
 	fi
 }
+
+function csComplete() {
+	local commands
+	COMPREPLY=()
+	commands=(bashbuild bh chromehistory fz gfa gpr grd gruntr gs jb jf ll lla npmprivate npmpublic npmr)
+
+	for i in "${commands[@]}"
+	do
+		if [[ $i == "$2"* ]]
+		then
+			COMPREPLY+=($i)
+		fi
+	done
+
+	return 0
+}
+
+alias cs=cheatsheet
+complete -F csComplete cs
 
 function bh () {
 	local cmd
