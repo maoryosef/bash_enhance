@@ -98,8 +98,15 @@ function fz() {
 }
 
 function npmr() {
-	local script
+	local script additionalArgs
 
+	additionalArgs="${@:2}"
+
+	if [[ $additionalArgs != "" ]]
+	then
+		additionalArgs="-- $additionalArgs"
+	fi
+	
 	script="$1"
 
 	if [[ $script == "" ]]
@@ -110,8 +117,8 @@ function npmr() {
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
-		history -s "npm run $script"
-		eval "npm run $script"
+		history -s "npm run $script $additionalArgs"
+		eval "npm run $script $additionalArgs"
 	fi
 }
 
