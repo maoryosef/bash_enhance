@@ -225,7 +225,7 @@ function jb () {
 }
 
 function jbComplete() {
-	COMPREPLY=(`eval "git branch -l | sed 's/ //g' | sed '/^\*/ d' | sed '/^${2}/ !d'"`)
+	COMPREPLY=(`eval "git branch | sed 's/ //g; /^\*/ d; /^${2}/ !d'"`)
 
 	return 0
 }
