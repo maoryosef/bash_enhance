@@ -97,6 +97,33 @@ function fz() {
 	fi
 }
 
+function branchDiff() {
+	local diffLocalRemote diffRemoteLocal
+
+	echo "***********************************************************"
+	echo "           Commits in local but not in remote"
+	echo "***********************************************************"
+
+	eval "git log --max-count=5 $1.."	
+
+	echo "***********************************************************"
+	echo "           Commits in remote but not in local"
+	echo "***********************************************************"
+
+	eval "git log --max-count=5 ..$1"	
+}
+
+function branchDiffComplete() {
+	local searchString
+
+	searchString="${2/\//\\/}"
+	COMPREPLY=(`eval "git branch -a | sed 's| ||g; /^\*/ d; s|remotes/||g; /^${searchString}/ !d'"`)
+
+	return 0
+}
+
+complete -F branchDiffComplete branchDiff
+
 function npmr() {
 	local script additionalArgs
 
@@ -250,6 +277,7 @@ function cheatsheet () {
 	then
 		cmdList="bashbuild: recompile bash"
 		cmdList="$cmdList\nbh: show commands history"
+		cmdList="$cmdList\nbranchDiff: show diff between current branch and specified branch"
 		cmdList="$cmdList\nchromehistory: search in chrome history (or jch)"
 		cmdList="$cmdList\nfz: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)"
 		cmdList="$cmdList\ngfa: git fetch --all"
@@ -279,7 +307,7 @@ function cheatsheet () {
 function csComplete() {
 	local commands
 	COMPREPLY=()
-	commands=(bashbuild bh chromehistory fz gfa gpr grd gruntr gs jb jf ll lla npmprivate npmpublic npmr)
+	commands=(bashbuild branchDiff bh chromehistory fz gfa gpr grd gruntr gs jb jf ll lla npmprivate npmpublic npmr)
 
 	for i in "${commands[@]}"
 	do
