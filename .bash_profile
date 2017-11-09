@@ -98,19 +98,32 @@ function fz() {
 }
 
 function branchDiff() {
-	local diffLocalRemote diffRemoteLocal
+	local diffLocalRemote diffRemoteLocal maxCount remoteName
 
-	echo "***********************************************************"
-	echo "           Commits in local but not in remote"
-	echo "***********************************************************"
+	remoteName=$1
+	maxCount=$2
 
-	eval "git log --max-count=5 $1.."	
+	if [[ $remoteName == "" ]]
+	then
+		remoteName="origin/master"
+	fi
 
-	echo "***********************************************************"
-	echo "           Commits in remote but not in local"
-	echo "***********************************************************"
+	if [[ $maxCount == "" ]]
+	then
+		maxCount=10
+	fi
 
-	eval "git log --max-count=5 ..$1"	
+	echo "┍┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┑"
+	echo -e "│         \033[1;34m↑\033[0m Commits in local but not in remote \033[1;34m↑\033[0m           │"
+	echo "┕┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┙"
+
+	eval "git log --pretty=oneline --max-count=$maxCount $remoteName.."	
+
+	echo "┍┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┑"
+	echo -e "│         \033[1;34m↓\033[0m Commits in remote but not in local \033[1;34m↓\033[0m           │"
+	echo "┕┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┙"
+
+	eval "git log --pretty=oneline --max-count=$maxCount ..$remoteName"	
 }
 
 function branchDiffComplete() {
