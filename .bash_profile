@@ -97,7 +97,7 @@ function fz() {
 	fi
 }
 
-function branchDiff() {
+function quickDiff() {
 	local diffLocalRemote diffRemoteLocal maxCount remoteName
 
 	remoteName=$1
@@ -126,7 +126,7 @@ function branchDiff() {
 	eval "git log --pretty=oneline --max-count=$maxCount ..$remoteName"	
 }
 
-function branchDiffComplete() {
+function quickDiffComplete() {
 	local searchString
 
 	searchString="${2/\//\\/}"
@@ -135,7 +135,9 @@ function branchDiffComplete() {
 	return 0
 }
 
-complete -F branchDiffComplete branchDiff
+alias qd=quickDiff
+complete -F quickDiffComplete quickDiff
+complete -F quickDiffComplete qd
 
 function npmr() {
 	local script additionalArgs
@@ -290,7 +292,6 @@ function cheatsheet () {
 	then
 		cmdList="bashbuild: recompile bash"
 		cmdList="$cmdList\nbh: show commands history"
-		cmdList="$cmdList\nbranchDiff: show diff between current branch and specified branch"
 		cmdList="$cmdList\nchromehistory: search in chrome history (or jch)"
 		cmdList="$cmdList\nfz: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)"
 		cmdList="$cmdList\ngfa: git fetch --all"
@@ -305,6 +306,7 @@ function cheatsheet () {
 		cmdList="$cmdList\nnpmprivate: switch to npm private"
 		cmdList="$cmdList\nnpmpublic: switch to npm private"
 		cmdList="$cmdList\nnpmr: list available npm scripts"
+		cmdList="$cmdList\nquickDiff: show diff between current branch and specified branch"
 	
 		rawCmd=`printf "$cmdList" | fzf --border --height 60% --reverse`
 	fi
@@ -320,7 +322,7 @@ function cheatsheet () {
 function csComplete() {
 	local commands
 	COMPREPLY=()
-	commands=(bashbuild branchDiff bh chromehistory fz gfa gpr grd gruntr gs jb jf ll lla npmprivate npmpublic npmr)
+	commands=(bashbuild bh chromehistory fz gfa gpr grd gruntr gs jb jf ll lla npmprivate npmpublic npmr quickDiff)
 
 	for i in "${commands[@]}"
 	do
