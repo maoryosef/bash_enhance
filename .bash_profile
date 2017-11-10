@@ -98,8 +98,9 @@ function fz() {
 }
 
 function quickDiff() {
-	local diffLocalRemote diffRemoteLocal maxCount remoteName
+	local diffLocalRemote diffRemoteLocal maxCount remoteName logFormat
 
+	logFormat="%C(auto)%h - %cn: %s"
 	remoteName=$1
 	maxCount=$2
 
@@ -117,13 +118,13 @@ function quickDiff() {
 	echo -e "│         \033[1;34m↑\033[0m Commits in local but not in remote \033[1;34m↑\033[0m           │"
 	echo "┕┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┙"
 
-	eval "git log --pretty=oneline --max-count=$maxCount $remoteName.."	
+	eval "git log --pretty=format:\"$logFormat\" --max-count=$maxCount $remoteName.."	
 
 	echo "┍┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┑"
 	echo -e "│         \033[1;34m↓\033[0m Commits in remote but not in local \033[1;34m↓\033[0m           │"
 	echo "┕┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┙"
 
-	eval "git log --pretty=oneline --max-count=$maxCount ..$remoteName"	
+	eval "git log --pretty=\"$logFormat\" --max-count=$maxCount ..$remoteName"	
 }
 
 function quickDiffComplete() {
