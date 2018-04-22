@@ -295,6 +295,7 @@ function cheatsheet () {
 		cmdList="$cmdList\nbh: show commands history"
 		cmdList="$cmdList\nchromehistory: search in chrome history (or jch)"
 		cmdList="$cmdList\nfz: perform fuzzy find on files (-g for global -h to include hidden files, -ws / -webstorm to open in webstorm)"
+		cmdList="$cmdList\ngcaf: git -xdf -e .idea"
 		cmdList="$cmdList\ngfa: git fetch --all"
 		cmdList="$cmdList\ngpr: git pull --rebase"
 		cmdList="$cmdList\ngprm: git pull --rebase from master"
@@ -358,6 +359,7 @@ alias gpr='git pull --rebase --stat'
 alias gprm='git pull --rebase --stat origin master'
 alias grd='git rebase --ignore-date'
 alias gfa='git fetch --all'
+alias gcaf='git clean -xdf -e .idea'
 ####################################################
 
 alias ll='ls -l'
