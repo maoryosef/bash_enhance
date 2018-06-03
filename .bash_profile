@@ -213,14 +213,30 @@ alias jch=chromehistory
 
 CURRENT_PROJ=""
 
+function getPackageName() {
+	#TODO: find a faster way to get the package name
+	cut -d "=" -f 2 <<< $(npm run env 2>/dev/null | grep "npm_package_name")
+}
+
 function getBadgeName() {
+	local inside_git_repo projectName npm_package
+
+	if [ "$CURRENT_PROJ" == "$PWD" ]; then
+		return 0
+	fi
+
+	projectName=""
     inside_git_repo="$(git rev-parse --is-inside-work-tree 2>/dev/null)";
-    if [ "$inside_git_repo" ]; then 
+    npm_package=`getPackageName`
+
+	if [ "$npm_package" != "" ]; then 
+	   projectName="$npm_package"
+	elif [ "$inside_git_repo" ]; then 
       projectName=`git rev-parse --show-toplevel | xargs basename`;
-      iterm2_set_user_var project "$projectName";
-    else 
-      iterm2_set_user_var project "";
     fi
+
+	CURRENT_PROJ="$PWD"
+    iterm2_set_user_var project "$projectName";
 }
 
 LAST_NVMRC_LOCATION=""
