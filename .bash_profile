@@ -374,7 +374,7 @@ alias gs='git status'
 alias gpr='git pull --rebase --stat'
 alias gprm='git pull --rebase --stat origin master'
 alias grd='git rebase --ignore-date'
-alias gfa='git fetch --all'
+alias gfa='git fetch --all --prune'
 alias gcaf='git clean -xdf -e .idea'
 ####################################################
 
