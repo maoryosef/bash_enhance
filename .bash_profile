@@ -325,6 +325,7 @@ function cheatsheet () {
 		cmdList="$cmdList\nnpmprivate: switch to npm private"
 		cmdList="$cmdList\nnpmpublic: switch to npm private"
 		cmdList="$cmdList\nnpmr: list available npm scripts"
+		cmdList="$cmdList\nshowLinks: show linked modules"
 		cmdList="$cmdList\nquickDiff: show diff between current branch and specified branch"
 	
 		rawCmd=`printf "$cmdList" | fzf --border --height 60% --reverse`
@@ -386,6 +387,8 @@ alias npmprivate='npm config set registry http://npm.dev.wixpress.com'
 alias npmpublic='npm config set registry https://registry.npmjs.org/'
 
 alias bashbuild='source ~/.bash_profile'
+
+alias showLinks='find node_modules -type l -maxdepth 1 | sed -e "s|node_modules/||"'
 
 npmprivate
 
