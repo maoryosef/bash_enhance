@@ -386,6 +386,8 @@ alias grep='grep --color=auto'
 alias npmprivate='npm config set registry http://npm.dev.wixpress.com'
 alias npmpublic='npm config set registry https://registry.npmjs.org/'
 
+alias ds='du -hcs'
+
 alias bashbuild='source ~/.bash_profile'
 
 alias showLinks='find node_modules -type l -maxdepth 1 | sed -e "s|node_modules/||"'
