@@ -394,6 +394,10 @@ alias showLinks='find node_modules -type l -maxdepth 1 | sed -e "s|node_modules/
 
 npmprivate
 
+#Fix Mojave shitty fonts issue
+#https://ahmadawais.com/fix-macos-mojave-font-rendering-issue/
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool FALSE
+###############################################
 #Fix ssh issues in sierra, where keys are lost
 # ssh-add -K
 # fixed according to https://superuser.com/questions/1127067/macos-keeps-asking-my-ssh-passphrase-since-i-updated-to-sierra
