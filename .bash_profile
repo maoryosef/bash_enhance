@@ -160,8 +160,8 @@ function npmr() {
 	if [[ "$script" != "" ]]
 	then
 		script=${script%% *}
-		history -s "npm run $script $additionalArgs"
-		eval "npm run $script $additionalArgs"
+		history -s "yarn $script $additionalArgs"
+		eval "yarn $script $additionalArgs"
 	fi
 }
 
