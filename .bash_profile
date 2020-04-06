@@ -315,6 +315,7 @@ function cheatsheet () {
 		cmdList="$cmdList\ngfa: git fetch --all"
 		cmdList="$cmdList\ngpr: git pull --rebase"
 		cmdList="$cmdList\ngprm: git pull --rebase from master"
+		cmdList="$cmdList\ngpru: git pull --rebase from upstream master (used when forked, and have an 'upstream' remote)"
 		cmdList="$cmdList\ngrd: git rebase --ignore-date"
 		cmdList="$cmdList\ngruntr: list available grunt tasks"
 		cmdList="$cmdList\ngs: git status"
@@ -342,7 +343,7 @@ function cheatsheet () {
 function csComplete() {
 	local commands
 	COMPREPLY=()
-	commands=(bashbuild bh chromehistory fz gfa gpr gprm grd gruntr gs jb jf ll lla npmprivate npmpublic npmr quickDiff)
+	commands=(bashbuild bh chromehistory fz gfa gpr gprm gpru grd gruntr gs jb jf ll lla npmprivate npmpublic npmr quickDiff)
 
 	for i in "${commands[@]}"
 	do
@@ -374,9 +375,10 @@ alias jf=jfzf
 alias gs='git status'
 alias gpr='git pull --rebase --stat'
 alias gprm='git pull --rebase --stat origin master'
+alias gpru='git pull --rebase --stat upstream master'
 alias grd='git rebase --ignore-date'
 alias gfa='git fetch --all --prune'
-alias gcaf='git clean -xdf -e .idea'
+alias gcaf='git clean -xdf -e .idea -e .vscode'
 ####################################################
 
 alias ll='ls -l'
