@@ -300,6 +300,11 @@ function jfzf () {
 	fi
 }
 
+function createpr () {
+	git branch -M "$1"
+	gh pr create
+}
+
 function cheatsheet () {
 	local cmd rawCmd cmdList
 
@@ -388,6 +393,7 @@ alias grep='grep --color=auto'
 alias npmprivate='npm config set registry http://npm.dev.wixpress.com'
 alias npmpublic='npm config set registry https://registry.npmjs.org/'
 
+alias dnode='node --inspect-brk'
 alias ds='du -hcs'
 
 alias bashbuild='source ~/.bash_profile'
